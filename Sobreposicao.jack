@@ -1,0 +1,58 @@
+
+class Sobreposicao {
+    field Array sobreposicao;
+
+    constructor Sobreposicao new() {
+        var int r;
+        let sobreposicao = Array.new(Constantes.LEVEIS());
+        let r = 0;
+
+        while (r < Constantes.LEVEIS()) {
+            let sobreposicao[r] = Array.new(Constantes.COLUNAS());
+            let r = r + 1;
+        }
+        return this;
+    }
+    method int add(Array linha, int level, int scoreint) {
+        var int blocosjunt, i;
+        var Array top, newtop;
+        let top = sobreposicao[level -1];
+        let newtop = sobreposicao[level];
+        let i = 0;
+        let blocosjunt = 0;
+
+        if ((level = 0) & (scoreint > 50)) {
+            while (i < Constantes.COLUNAS()) {
+                let newtop[i] = linha[i];
+                if (newtop[i]) {
+                    let blocosjunt = blocosjunt + 1;
+                }
+                let i = i + 1;
+            }
+        }
+        if ((level = 0) & (scoreint = 0)) {
+            let newtop = sobreposicao[0];
+            while (i < Constantes.COLUNAS()) {
+                let newtop[i] = linha[i];
+                let i = i + 1;
+            }
+            let blocosjunt = 4;
+        }   else {
+            while (i < Constantes.COLUNAS()) {
+                let newtop[i] = top[i] & linha[i];
+                if (newtop[i]) {
+                    let blocosjunt = blocosjunt + 1;
+                }
+                let i = i + 1;
+            }
+        }
+        return blocosjunt;
+    }
+    method Array getLinha(int level) {
+        return sobreposicao[level];
+    }
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

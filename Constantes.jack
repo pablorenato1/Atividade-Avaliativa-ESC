@@ -1,0 +1,21 @@
+class Constantes {
+    function int COLUNAS() {
+        return 7;
+    }
+
+    function int LEVEIS() {
+        return 15;
+    }
+    
+    function in KEY_SPACE() {
+        return 32;
+    }
+
+    function int KEY_ENTER() {
+        return 128;
+    }
+
+    function int KEY_ESC() {
+        return 140;
+    }
+}

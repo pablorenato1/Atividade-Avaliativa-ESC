@@ -1,0 +1,88 @@
+
+class Movimentos {
+    field int x;
+    field int delay;
+    field int direcao;
+    field int time;
+    field int blocos;
+    field Array linha;
+    
+    constructor Movimentos new() {
+        let delay = 1000;
+        let time = 0;
+        let direcao = 1;
+        let linha = Array.new(Constantes.COLUNAS());
+        do setLinha(2, 4);
+        do setLevel(0, blocos, 0);
+        return this;
+    }
+
+    method void setLinha(int offset, int aBlocos) {
+        var int i;
+        let i = 0;
+        let x = offset;
+        let blocos = aBlocos;
+
+        while (i < Constantes.COLUNAS()) {
+            if ((i > (x - 1)) & (i < (x + blocos))) {
+                let linha[i] = true;
+            }   else {
+                let linha[i] = false;
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    method Array getLinha() {
+        return linha;
+    }
+
+    method void setLevel(int level, int aBlocos, int scoreint) {
+        do setDelay(level, scoreint);
+        do setLinha(2, aBlocos);
+        return;
+    }
+    method void setDelay(int level, int scoreint) {
+        if ((level = 0) & (scoreint < 70)) {
+            let delay = 500;
+        }
+
+        if ((level > 0) & (level < 10) & (scoreint < 70)) {
+            let delay = delay - 25;
+        }
+
+        if ((level = 10) & (scoreint < 70)) {
+            let delay = 250;
+        }
+
+        if (level > 10) {
+            let delay = 150;
+        }
+        if (scoreint > 70) {
+            let delay = 140;
+        }
+    return;
+    }
+    method void move() {
+        if (time < delay) {
+            let time = time +1;
+            return;
+        }   else {
+            let time = 0;
+        }
+        if (x = (Constantes.COLUNAS() - blocos)) {
+            let direcao = -1;
+        }
+        if (x = 0) {
+            let direcao = 1;
+        }
+        
+        let x = x + direcao;
+        do setLinha(x, blocos);
+        return;
+    }
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

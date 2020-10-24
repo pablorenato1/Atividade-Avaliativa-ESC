@@ -1,0 +1,9 @@
+class Main {
+    function void main() {
+        var Inicio inicio;
+        let inicio = Inicio.new();
+        do inicio.run();
+        do inicio.dispose();
+        return;
+    }
+}
